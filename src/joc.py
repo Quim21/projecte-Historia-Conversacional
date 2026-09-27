@@ -1,10 +1,10 @@
 # Quim Pérez / Pol Moyano
 
-from excepcions.errors import OrdreInvalida
+from excepcions.errors import MovimentInvalid
 from mapa.sortida import Sortida
 from mapa.zona import Zona
 from ordres.interpret import interpretar
-from personatges.personatge import Personatge
+from personatges.jugador import Jugador
 
 
 class classeJoc:
@@ -18,8 +18,7 @@ class classeJoc:
 
     def iniciar(self):
         self.crearMapa()
-        # De moment el jugador és un Personatge; quan hi hagi la classe Jugador es canviarà
-        self.jugador = Personatge(self.buscarZona("dormitori"))
+        self.jugador = Jugador(self.buscarZona("dormitori"))
         self.mostrarIntroduccio()
         print(self.descriureZona(self.jugador.zona_actual))
 
@@ -71,18 +70,40 @@ class classeJoc:
         print("=" * 70)
 
     def descriureZona(self, zona):
-        text = f"\n[{zona.nom.upper()}]\n{zona.descripcio}"
+        text = "\n" + zona.descriure()
         text += "\nSortides: " + ", ".join(s.zonaDesti for s in zona.sortides)
         return text
 
     def jugarTorn(self, ordre):
-        try:
-            verb, objectiu = interpretar(ordre)
-        except OrdreInvalida as e:
-            print(e)
+        # Si l'ordre no és vàlida, l'excepció la recull el main i no es compta el torn
+        verb, objectiu = interpretar(ordre)
+
+        if verb == "ANAR":
+            if not self.moureJugador(objectiu):
+                return
+        else:
+            print(f"Encara no sé fer l'acció {verb}.")
             return
-        # Encara no hi ha cap verb implementat
-        print(f"Has dit {verb} {objectiu or ''}, però encara no sé fer-ho.")
+
+        self.torn += 1
+
+    def moureJugador(self, nomDesti):
+        if nomDesti is None:
+            print("On vols anar?")
+            return False
+
+        nomDesti = nomDesti.lower()
+        for sortida in self.jugador.zona_actual.sortides:
+            if sortida.zonaDesti == nomDesti:
+                self.jugador.moure(self.buscarZona(nomDesti))
+                print(self.descriureZona(self.jugador.zona_actual))
+                return True
+
+        raise MovimentInvalid(nomDesti)
 
     def comprovarFinal(self):
         return self.acabat
+
+    def reiniciar(self):
+        # El main torna a cridar iniciar() després de reiniciar
+        self.__init__()
