@@ -67,7 +67,14 @@ class classeJoc:
         print("  Any 2120 D.C. La nau PiaXXII viatja cap al planeta SUMMEM.")
         print("  Un aeròlit ha danyat els propulsors. Repara'ls i torna a la sala")
         print("  de comandament per posar en marxa els motors.")
+        print("  (Escriu 'ajuda' per veure les ordres)")
         print("=" * 70)
+
+    def mostrarAjuda(self):
+        print("Ordres disponibles:")
+        print("  anar <zona>   Et mous a una zona del costat (ex: anar banys)")
+        print("  ajuda         Mostra aquesta ajuda")
+        print("  sortir        Abandona la partida")
 
     def descriureZona(self, zona):
         text = "\n" + zona.descriure()
@@ -75,6 +82,16 @@ class classeJoc:
         return text
 
     def jugarTorn(self, ordre):
+        # Ordres de control de la partida, no són accions del joc
+        control = ordre.strip().lower()
+        if control == "ajuda":
+            self.mostrarAjuda()
+            return
+        if control == "sortir":
+            print(f"Abandones la partida després de {self.torn} torns.")
+            self.acabat = True
+            return
+
         # Si l'ordre no és vàlida, l'excepció la recull el main i no es compta el torn
         verb, objectiu = interpretar(ordre)
 
