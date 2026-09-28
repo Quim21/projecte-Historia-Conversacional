@@ -1,8 +1,8 @@
 # Quim Pérez / Pol Moyano
 
-from excepcions.errors import MovimentInvalid
 from mapa.sortida import Sortida
 from mapa.zona import Zona
+from ordres.anar import anar
 from ordres.interpret import interpretar
 from personatges.jugador import Jugador
 
@@ -109,14 +109,9 @@ class classeJoc:
             print("On vols anar?")
             return False
 
-        nomDesti = nomDesti.lower()
-        for sortida in self.jugador.zona_actual.sortides:
-            if sortida.zonaDesti == nomDesti:
-                self.jugador.moure(self.buscarZona(nomDesti))
-                print(self.descriureZona(self.jugador.zona_actual))
-                return True
-
-        raise MovimentInvalid(nomDesti)
+        zonaDesti = anar(self.jugador, self.zones, nomDesti)
+        print(self.descriureZona(zonaDesti))
+        return True
 
     def comprovarFinal(self):
         return self.acabat
