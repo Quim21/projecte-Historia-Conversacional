@@ -1,3 +1,5 @@
+# Quim Pérez / Pol Moyano
+
 class Objecte:
     def __init__(self, nom, descripcio, portable=True):
         self.nom = nom
