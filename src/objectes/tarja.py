@@ -4,10 +4,17 @@ from objectes.objecte import Objecte
 
 
 class Tarja(Objecte):
-    """Tarja d'accés: obre les portes automàtiques de la nau."""
+    """Tarja identificadora: obre les portes automàtiques de la nau.
+    Pot ser la del capità o la d'un company."""
 
-    def __init__(self):
-        super().__init__("tarja", "Una tarja d'accés de la tripulació.")
+    def __init__(self, del_company=False):
+        if del_company:
+            super().__init__("tarja", "La tarja identificadora d'un company.")
+        else:
+            super().__init__("tarja", "La teva tarja identificadora.")
+        self.del_company = del_company
 
     def usar(self, objectiu=None):
-        return "No cal fer-la servir: les portes automàtiques s'obren si portes la tarja."
+        if self.del_company:
+            return "L'iHall obre la porta, però et recorda que aquesta no és la teva tarja."
+        return "La porta s'obre automàticament."
