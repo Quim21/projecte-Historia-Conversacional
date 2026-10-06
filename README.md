@@ -69,18 +69,11 @@ src/
 ├── personatges/       Personatge i els seus fills: Jugador, Company, Malien
 ├── ordres/            un fitxer per ordre, l'intèrpret (interpret.py) i el despatxador (despatx.py)
 └── excepcions/        errors del joc (tots hereten de JocError)
-tests/                 proves automàtiques
 docs/                  diagrama de classes
 ```
 
 Les errades de l'usuari (ordre desconeguda, objecte que no hi és, acció impossible...) es gestionen amb excepcions
 pròpies que hereten de `JocError`; `main.py` les captura i mostra el missatge sense aturar la partida.
-
-## Proves
-
-```bash
-python -m unittest discover -s tests
-```
 
 ## Documentació
 
