@@ -1,12 +1,14 @@
 from excepcions.errors import AccioImpossible
 from ordres.agafar import agafar
 from ordres.apagar import apagar
+from ordres.deixar import deixar
 from ordres.encendre import encendre
 from ordres.obrir import obrir
 from ordres.tancar import tancar
 
 VERBS_OBJECTE = {
     "AGAFAR": agafar,
+    "DEIXAR": deixar,
     "ENCENDRE": encendre,
     "APAGAR": apagar,
     "OBRIR": obrir,

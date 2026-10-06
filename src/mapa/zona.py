@@ -7,10 +7,10 @@ class Zona:
         self.objectes = objectes if objectes is not None else []
         self.sortides = sortides if sortides is not None else []
 
-    def descriure(self):
+    def descriure(self, ocults=None):
         text = f"{self.nom}\n{self.descripcio}"
-        if self.objectes:
-            noms = ", ".join(objecte.nom for objecte in self.objectes)
+        visibles = [objecte for objecte in self.objectes if ocults is None or objecte not in ocults]
+        if visibles:
+            noms = ", ".join(objecte.nom for objecte in visibles)
             text += f"\nObjectes: {noms}"
         return text
-
