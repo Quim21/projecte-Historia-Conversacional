@@ -146,8 +146,11 @@ class classeJoc:
         text = "\n" + zona.descriure(self.objectesOcults(zona))
         if self.company is not None and self.company.zona_actual is zona and not self.company.despert:
             text += "\nUn company teu dorm profundament en una càpsula. (Prova: parlar company)"
-        text += "\nSortides: " + ", ".join(s.zonaDesti for s in zona.sortides)
         return text
+
+    def mostrarSituacio(self):
+        zona = self.jugador.zona_actual
+        print(f"[{zona.nom}] Sortides: " + ", ".join(s.zonaDesti for s in zona.sortides))
 
     def objectesOcults(self, zona):
         if zona.nom == "tallers" and not self.llanternaEncesa():

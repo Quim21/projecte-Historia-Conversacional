@@ -484,6 +484,35 @@ class TestOrdresDeControl(unittest.TestCase):
     def setUp(self):
         self.joc = helpers.nova_partida()
 
+    def test_la_situacio_diu_on_ets_i_les_sortides(self):
+        sortida = io.StringIO()
+        with contextlib.redirect_stdout(sortida):
+            self.joc.mostrarSituacio()
+        self.assertEqual(sortida.getvalue().strip(), "[dormitori] Sortides: banys, menjador")
+
+    def test_la_situacio_surt_abans_de_cada_ordre(self):
+        import main
+        sortida = io.StringIO()
+        with patch("builtins.input", side_effect=["ajuda", "inventari", "sortir"]), \
+                contextlib.redirect_stdout(sortida):
+            main.jugar_partida(helpers.classeJoc())
+        self.assertEqual(sortida.getvalue().count("[dormitori] Sortides: banys, menjador"), 3)
+
+    def test_la_situacio_canvia_quan_et_mous(self):
+        self.joc.malien.distret = True
+        with patch("ihall.random.random", return_value=0.1):
+            helpers.executa(self.joc, "anar banys")
+        sortida = io.StringIO()
+        with contextlib.redirect_stdout(sortida):
+            self.joc.mostrarSituacio()
+        self.assertEqual(sortida.getvalue().strip(), "[banys] Sortides: oficines, dormitori")
+
+    def test_les_sortides_no_es_repeteixen_en_entrar_a_una_zona(self):
+        self.joc.malien.distret = True
+        with patch("ihall.random.random", return_value=0.1):
+            sortida = helpers.executa(self.joc, "anar banys")
+        self.assertNotIn("Sortides", sortida)
+
     def test_ajuda_i_inventari_no_compten_torn(self):
         helpers.executa(self.joc, "ajuda")
         self.assertIn("No portes res", helpers.executa(self.joc, "inventari"))

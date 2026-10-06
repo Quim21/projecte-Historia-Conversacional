@@ -30,6 +30,7 @@ def jugar_partida(joc):
     joc.iniciar()
 
     while not joc.comprovarFinal():
+        joc.mostrarSituacio()
         ordre = input("Què vols fer? ")
         try:
             joc.jugarTorn(ordre)
