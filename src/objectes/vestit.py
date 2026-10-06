@@ -4,8 +4,6 @@ from objectes.objecte import Objecte
 
 
 class Vestit(Objecte):
-    """Vestit d'astronauta del vestuari: sense ell no es pot sobreviure a l'exterior de la nau."""
-
     def __init__(self):
         super().__init__("vestit", "El vestit d'astronauta.")
         self.equipat = False

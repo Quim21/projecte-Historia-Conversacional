@@ -4,9 +4,6 @@ from objectes.objecte import Objecte
 
 
 class Eina(Objecte):
-    """Eina especial dels tallers per reparar els propulsors.
-    Està a les fosques: cal la llanterna encesa per poder agafar-la."""
-
     def __init__(self):
         super().__init__("eina", "Una eina especial per reparar els motors.")
         self.utilitzat = False

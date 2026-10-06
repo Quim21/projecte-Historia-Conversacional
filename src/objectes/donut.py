@@ -4,10 +4,6 @@ from objectes.objecte import Objecte
 
 
 class Donut(Objecte):
-    """Dònuts de la cuina: serveixen per despistar en Malien o en Gonzalin (el company).
-    Si en Gonzalin els troba, se'ls menja i ja no es poden fer servir."""
-
-    # Personatges que es poden despistar amb els dònuts
     DESPISTABLES = ("malien", "gonzalin")
 
     def __init__(self):
@@ -15,7 +11,6 @@ class Donut(Objecte):
         self.menjat = False
 
     def menjar(self):
-        # El crida en Gonzalin quan troba els dònuts
         self.menjat = True
 
     def usar(self, objectiu=None):

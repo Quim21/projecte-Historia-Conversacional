@@ -5,8 +5,6 @@ from objectes.objecte import Objecte
 
 
 class Calaix(Objecte):
-    """Calaix d'un escriptori de l'oficina. Cal obrir-lo per veure i agafar el que hi ha dins."""
-
     def __init__(self, contingut=None):
         super().__init__("calaix", "Un calaix d'un escriptori.", portable=False)
         self.obert = False
@@ -28,7 +26,6 @@ class Calaix(Objecte):
         return "Tanques el calaix."
 
     def treure(self, nom):
-        """Treu un objecte del calaix (per a l'ordre AGAFAR). Només si està obert."""
         if self.obert:
             for objecte in self.contingut:
                 if objecte.nom.lower() == nom.lower():

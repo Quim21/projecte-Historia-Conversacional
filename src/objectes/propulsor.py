@@ -4,7 +4,6 @@ from objectes.objecte import Objecte
 
 
 class Propulsor(Objecte):
-    """Propulsors de la nau, danyats per l'aeròlit. Es reparen amb l'eina."""
 
     def __init__(self):
         super().__init__("propulsors", "Els propulsors danyats per l'aeròlit.", portable=False)

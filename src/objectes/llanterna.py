@@ -4,9 +4,6 @@ from objectes.objecte import Objecte
 
 
 class Llanterna(Objecte):
-    """Llanterna: es pot encendre a qualsevol lloc de la nau.
-    Cal tenir-la encesa per poder agafar l'eina dels tallers."""
-
     def __init__(self):
         super().__init__("llanterna", "Una llanterna.")
         self.encesa = False

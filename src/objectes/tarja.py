@@ -4,8 +4,6 @@ from objectes.objecte import Objecte
 
 
 class Tarja(Objecte):
-    """Tarja identificadora: obre les portes automàtiques de la nau.
-    Pot ser la del capità o la d'un company."""
 
     def __init__(self, del_company=False):
         if del_company:
