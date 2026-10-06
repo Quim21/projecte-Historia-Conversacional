@@ -129,12 +129,37 @@ class classeJoc:
             ("tancar <obj>", "Tanques un objecte"),
             ("parlar [company]", "Preguntes a iHall, o despertes el teu company"),
             ("inventari", "Mostra el que portes a sobre"),
+            ("mapa", "Dibuixa el mapa de la nau i on ets"),
             ("ajuda", "Mostra aquesta ajuda"),
             ("sortir", "Abandona la partida"),
         ]
         print("Ordres disponibles:")
         for ordre, descripcio in ordres:
             print(f"  {ordre.ljust(24)}{descripcio}")
+
+    def mostrarMapa(self):
+        actual = self.jugador.zona_actual.nom
+
+        def caixa(nom):
+            marca = "*" if nom == actual else " "
+            return f"[{marca}{nom.center(11)}{marca}]"
+
+        centre = " " * 28 + "|"
+        laterals = " " * 9 + "|" + " " * 18 + "|" + " " * 18 + "|"
+
+        print()
+        print(" " * 21 + caixa("tallers"))
+        print(centre)
+        print("  " + caixa("vestuari") + "----" + caixa("oficines") + "----" + caixa("banys"))
+        print(laterals)
+        print("  " + caixa("cuina") + "    " + caixa("comandament") + "    " + caixa("dormitori"))
+        print(laterals)
+        print(" " * 9 + "+" + "-" * 11 + caixa("menjador") + "-" * 11 + "+")
+        print(centre)
+        print(" " * 21 + caixa("exterior"))
+        print(centre)
+        print(" " * 21 + caixa("propulsors"))
+        print("\n  [*nom*] = tu ets aquí")
 
     def mostrarInventari(self):
         if not self.jugador.inventari:
@@ -168,6 +193,9 @@ class classeJoc:
             return
         if control == "inventari":
             self.mostrarInventari()
+            return
+        if control == "mapa":
+            self.mostrarMapa()
             return
         if control == "sortir":
             print(f"Abandones la partida després de {self.torn} torns.")

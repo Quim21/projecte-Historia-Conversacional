@@ -35,10 +35,11 @@ Es poden escriure en majúscules o minúscules.
 | `parlar` | Fas una pregunta a iHall (tries un número entre 3 preguntes) |
 | `parlar company` | Despertes el teu company |
 | `inventari` | Mostra el que portes a sobre |
+| `mapa` | Dibuixa el mapa de la nau i marca amb `*` on ets |
 | `ajuda` | Llista les ordres |
 | `sortir` | Abandones la partida |
 
-Les ordres `inventari`, `ajuda` i `sortir`, i qualsevol ordre que doni error, no compten com a torn.
+Les ordres `inventari`, `mapa`, `ajuda` i `sortir`, i qualsevol ordre que doni error, no compten com a torn.
 
 ### Regles del joc
 
