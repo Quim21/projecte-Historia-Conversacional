@@ -1,7 +1,7 @@
 # Quim Pérez / Pol Moyano
 
 from joc import classeJoc
-from excepcions.errors import OrdreInvalida, MovimentInvalid
+from excepcions.errors import JocError
 
 def main():
     if not menu_inici():
@@ -33,7 +33,7 @@ def jugar_partida(joc):
         ordre = input("Què vols fer? ")
         try:
             joc.jugarTorn(ordre)
-        except (OrdreInvalida, MovimentInvalid) as error:
+        except JocError as error:
             print(error)
 
 def vol_tornar_a_jugar():
